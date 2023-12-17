@@ -9,6 +9,7 @@ const screenWidth = wp('100%');
 const backgroundColor = {
   darkBackground: '#121212',
   white: '#FFFFFF',
+  dark: '#303030',
   black: '#000000',
   secondaryBlack: '#292929',
   primary: '#FAFAFA',

@@ -18,3 +18,17 @@ export const fetchWeatherFailureAction = error => ({
   type: ActionTypes.fetchWeatherFailure,
   payload: {error},
 });
+
+export const getWeather = city => ({
+  type: ActionTypes.getWeather,
+  payload: city,
+});
+
+export const clearWeatherData = () => ({
+  type: ActionTypes.clearWeatherData,
+});
+
+export const getCities = query => ({
+  type: ActionTypes.getCities,
+  payload: query,
+});
