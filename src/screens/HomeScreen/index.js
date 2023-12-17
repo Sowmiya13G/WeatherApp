@@ -6,6 +6,7 @@ import {fetchWeatherRequestAction} from '../../redux/Action/action';
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const {weatherData, loading, error} = useSelector(state => state.weather);
+  console.log('weatherData', weatherData);
   const [cityName, setCityName] = useState('');
 
   const handleSearch = () => {

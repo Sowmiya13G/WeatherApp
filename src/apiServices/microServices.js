@@ -1,5 +1,5 @@
-import {WEATHER_URL} from '@env';
+// Base URL
+export const WEATHER_URL = 'https://api.openweathermap.org/data/2.5';
 
-export const MicroService = {
-  WEATHER: WEATHER_URL,
-};
+// API Key
+export const API_KEY = '830b0ea2790c5efd29f56ef56b1bcfda';

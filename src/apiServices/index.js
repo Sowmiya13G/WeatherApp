@@ -1,19 +1,33 @@
-import {ApiEndpoints} from './apiEndPoints';
+import axios from 'axios';
 import {MicroService} from './microServices';
-
-export const checkApiStatus = async () => {
-  try {
-    const apiConfigs = {
-      url: ApiEndpoints.YOUR_ENDPOINT,
-      payload: {},
-    };
-
-    const api = APIInstance(apiConfigs);
-
-    const response = await api.get(MicroService.WEATHER);
-
-    console.log('API Status:', response.status);
-  } catch (error) {
-    console.error('Error checking API status:', error);
+const APIKit = axios.create({
+  baseURL: MicroService,
+  timeout: 30000,
+});
+const responseHandler = response => {
+  if (response.status === 401) {
+    return Promise.reject(response);
   }
+  return response;
 };
+
+const errorHandler = async error => {
+  if (error.toJSON().message === 'Network Error') {
+    console.error('Network Error:', error);
+  }
+
+  if (error.response && error.response.status === 401) {
+    console.error('Unauthorized:', error);
+  }
+
+  return Promise.reject(error);
+};
+
+APIKit.interceptors.request.use(function (config) {
+  config.headers['Content-Type'] = 'application/json';
+  return config;
+});
+
+APIKit.interceptors.response.use(responseHandler, errorHandler);
+
+export default APIKit;
