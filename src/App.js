@@ -1,13 +1,13 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import {ThemeProvider} from './utils/themeContext';
-import HomeScreen from './screens/HomeScreen';
+import AppNavigator from './navigation/AppNavigator';
 import store from './redux/store';
 const App = () => {
   return (
     <ThemeProvider>
       <Provider store={store}>
-        <HomeScreen />
+        <AppNavigator />
       </Provider>
     </ThemeProvider>
   );

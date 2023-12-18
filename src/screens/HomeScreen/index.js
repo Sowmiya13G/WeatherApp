@@ -1,108 +1,39 @@
-import React, {useState, useContext} from 'react';
-import {View, Text, TouchableOpacity, FlatList, Switch} from 'react-native';
-import {SearchBar, Icon} from 'react-native-elements';
-import {useDispatch, useSelector} from 'react-redux';
-import {styles} from './styles';
-import {
-  getWeather,
-  clearWeatherData,
-  getCities,
-} from '../../redux/Action/action';
-import {ThemeContext} from '../../utils/themeContext';
+import React, {useContext} from 'react';
+import {View, Text, Switch, ImageBackground} from 'react-native';
 import theme from '../../constants/theme';
+import {styles} from './styles';
+import commonImagePath from '../../constants/images';
+import {ThemeContext} from '../../utils/themeContext';
 
 const HomeScreen = () => {
-  const [city, setCity] = useState('');
-  console.log('city', city);
-  const dispatch = useDispatch();
-  const weatherData = useSelector(state => state.weather.data);
-  console.log('weatherData', weatherData);
-  const citySuggestions = useSelector(state => state.weather.citySuggestions);
-  console.log('citySuggestions', citySuggestions);
-
   const {isDarkMode, toggleTheme} = useContext(ThemeContext);
-
-  const handleGetWeather = () => {
-    dispatch(getWeather(city));
-  };
-
-  const handleCitySelect = selectedCity => {
-    setCity(selectedCity);
-    dispatch(clearWeatherData());
-    dispatch(getWeather(selectedCity));
-  };
-
-  const handleCityInputChange = text => {
-    setCity(text);
-    dispatch(getCities(text));
-  };
+  fontTheme = isDarkMode ? theme.fontColors.white : theme.fontColors.black;
 
   return (
-    <View style={isDarkMode ? styles.darkContainer : styles.lightContainer}>
-      <View style={styles.toggleContainer}>
-        <Switch value={isDarkMode} onValueChange={toggleTheme} />
-      </View>
-      <SearchBar
-        placeholder="Enter city name"
-        onChangeText={handleCityInputChange}
-        value={city}
-        lightTheme={!isDarkMode}
-        round
-        containerStyle={styles.input}
-        inputContainerStyle={{backgroundColor: 'transparent'}}
-        searchIcon={<Icon name="search" type="font-awesome" color="#000" />}
-        // clearIcon={<Icon name="times" type="font-awesome" color="#000" />}
-      />
-
-      {citySuggestions && citySuggestions.length > 0 && (
-        <View style={styles.productContainer}>
-          <FlatList
-            data={citySuggestions}
-            keyExtractor={item => item.id.toString()}
-            renderItem={({item}) => (
-              <TouchableOpacity onPress={() => handleCitySelect(item.name)}>
-                <Text>{item.name}</Text>
-              </TouchableOpacity>
-            )}
+    <ImageBackground
+      source={isDarkMode ? commonImagePath.snow : commonImagePath.desert}
+      resizeMode="cover"
+      style={styles.image}>
+      <View style={styles.container}>
+        <View style={styles.toggleContainer}>
+          <Switch
+            value={isDarkMode}
+            onValueChange={toggleTheme}
+            thumbColor={
+              isDarkMode
+                ? theme.backgroundColor.white
+                : theme.backgroundColor.dark
+            }
+            trackColor={
+              isDarkMode
+                ? theme.backgroundColor.white
+                : theme.backgroundColor.dark
+            }
           />
         </View>
-      )}
-      <TouchableOpacity
-        onPress={handleGetWeather}
-        style={styles.addToCartButton}>
-        <Text>Get Weather</Text>
-      </TouchableOpacity>
-      {weatherData && (
-        <View style={styles.weatherContainer}>
-          <Text style={styles.title}>City: {weatherData.name}</Text>
-          <Text style={styles.title}>
-            Temperature: {weatherData.main.temp} °C
-          </Text>
-          <Text style={styles.title}>
-            Temperature: {weatherData.main.temp_min} °C
-          </Text>
-          <Text style={styles.title}>
-            Maximum Temperature: {weatherData.main.temp_max} °C
-          </Text>
-          <Text style={styles.title}>
-            Minimum Temperature: {weatherData.main.pressure}
-          </Text>
-          <Text style={styles.title}>
-            Humidity: {weatherData.main.humidity}
-          </Text>
-
-          <Text style={styles.title}>
-            Description: {weatherData.weather[0].description}
-          </Text>
-          <Text style={styles.title}>TimeZone: {weatherData.timezone}</Text>
-          <Text style={styles.title}>Visibility: {weatherData.visibility}</Text>
-          <Text style={styles.title}>Clouds: {weatherData.clouds.all}</Text>
-          <Text style={styles.title}>Lat: {weatherData.coord.lat}</Text>
-          <Text style={styles.title}>Lang: {weatherData.coord.lon}</Text>
-          <Text style={styles.title}>Wind Speed: {weatherData.wind.speed}</Text>
-        </View>
-      )}
-    </View>
+        {/* <Text style={{...styles.title, color: fontTheme}}>HOME SCREEN</Text> */}
+      </View>
+    </ImageBackground>
   );
 };
 

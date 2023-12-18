@@ -15,21 +15,6 @@ const backgroundColor = {
   primary: '#FAFAFA',
   gray: '#CCCCCC',
   lightGray: '#E5E4E2',
-  orange: '#E47718',
-  green: '#008000',
-  red: '#FF0000',
-  lightCoral: '#F08080',
-  mediumAquamarine: '#66CDAA',
-  gradientGreen: '#37ECBA',
-  gradientBlue: '#72AFD3',
-  yellowishBrown: '#C6AB59',
-  oliveGreen: '#B29950',
-  saddleBrown: '#9E8847',
-  status: '#37ECBA',
-  saddleBrown2: '#786017',
-  saddleBrown3: '#6b5514',
-  saddleBrown4: '#50400f',
-  saddleBrown5: '#43350d',
 };
 
 const borderColor = {
@@ -55,6 +40,7 @@ const fontColors = {
   green: '#008000',
   black: '#000000',
   candyBlue: '#37ECBA',
+  hexGray: '#999999',
 };
 const light = {
   theme: {

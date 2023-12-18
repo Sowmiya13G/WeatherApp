@@ -1,12 +1,14 @@
 const commonImagePath = {
-  // background: require('../assets/images/background.jpg'),
-  // ads: require('../assets/images/ads.png'),
-  // adsBro: require('../assets/images/ads-bro.png'),
-  // bag: require('../assets/images/bag.png'),
-  // checkout: require('../assets/images/checkout.png'),
-  // ecommerce: require('../assets/images/ecommerce.png'),
-  // wishList: require('../assets/images/wishList.png'),
-  // web: require('../assets/images/web.png'),
-  // online: require('../assets/images/online.png'),
+  day: require('../assets/day.png'),
+  night: require('../assets/night.png'),
+  cloudy: require('../assets/cloudy1.jpg'),
+  night1: require('../assets/night3.jpg'),
+  sunny: require('../assets/sunny1.jpg'),
+  desert: require('../assets/desert.jpg'),
+  snow: require('../assets/snow.jpg'),
+
+  // night: require('../assets/night.png'),
+  // day: require('../assets/day.png'),
+  // night: require('../assets/night.png'),
 };
 export default commonImagePath;
